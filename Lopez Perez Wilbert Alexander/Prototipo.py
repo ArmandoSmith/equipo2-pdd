@@ -36,3 +36,4 @@ prototype.registerObject("a",a)
 b=prototype.clone("a",a=1,b=2,c=3)
 print a
 print b
+print(b.a, b.b, b.c)
