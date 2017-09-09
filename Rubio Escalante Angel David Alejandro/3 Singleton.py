@@ -1,3 +1,11 @@
+'''
+    Singleton
+    El patrón singleton es un patrón de creación (Creational Design Pattern) 
+    que tiene como objetivo garantizar que una clase sólo tenga una instancia y 
+    proporcionar un único punto de acceso a esa instancia. Este patrón suele ser 
+    utilizado en temas de logging (entre otros) donde solo se quiere tener una 
+    instancia del logger que centralice todo.
+'''
 
 class Singleton(object):
     _instance = None
