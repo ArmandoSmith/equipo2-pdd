@@ -1,0 +1,89 @@
+"""
+    El enfoque que se le dara a todos los patrones de diseno sera el de
+    un restaurante de pizzas
+"""
+"""
+    Abstract Factory
+    Este patron de diseno se utiliza para proporcionar una interfaz comun
+    para crear una serie de objetos (productos) bajo una u otra arquitectura
+    o framework.
+    Ejemplo:
+"""
+
+class Empleado:
+    def InteractuaCon(self, comida): pass
+
+class Cocinero(Empleado):
+    def InteractuaCon(self, comida):
+        print ("El cocinero a cocinado ", comida.Accion())
+
+class Cajero(Empleado):
+    def InteractuaCon(self, comida):
+        print ("El cajero a cobrado una ", comida.Accion())
+
+class Repartidor(Empleado):
+    def InteractuaCon(self, comida):
+        print ("El repartidor a llevado una ", comida.Accion())
+
+class Comida:
+    def Accion(self): pass
+
+class Pizza(Comida):
+    def Accion(self):
+        print ("Pizza")
+
+class Submarino(Comida):
+    def Accion(self):
+        print ("Submarino")
+
+#The Abstract Factory:
+class FabricaPizzeria:
+    def AccionEmpleado(self): pass
+    def AccionComida(self): pass
+
+#Concrete factories:
+class Cocinar_Pizza(FabricaPizzeria):
+    def AccionEmpleado(self): return Cocinero()
+    def AccionComida(self): return Pizza()
+
+class Cocinar_Submarino(FabricaPizzeria):
+    def AccionEmpleado(self): return Cocinero()
+    def AccionComida(self): return Submarino()
+
+class Vender_Pizza(FabricaPizzeria):
+    def AccionEmpleado(self): return Cajero()
+    def AccionComida(self): return Pizza()
+
+class Vender_Submarino(FabricaPizzeria):
+    def AccionEmpleado(self): return Cajero()
+    def AccionComida(self): return Submarino()
+
+class Repartir_Pizza(FabricaPizzeria):
+    def AccionEmpleado(self): return Repartidor()
+    def AccionComida(self): return Pizza()
+
+class Repartir_Submarino(FabricaPizzeria):
+    def AccionEmpleado(self): return Repartidor()
+    def AccionComida(self): return Submarino()
+
+class DesarrolloPizzeria:
+    def __init__(self, fabrica):
+        self.factory = fabrica
+        self.e = fabrica.AccionEmpleado()
+        self.c = fabrica.AccionComida()
+    def Producto(self):
+        self.e.InteractuaCon(self.c)
+
+Cocinar1 = DesarrolloPizzeria(Cocinar_Pizza())
+Cocinar2 = DesarrolloPizzeria(Cocinar_Submarino())
+Vender1 = DesarrolloPizzeria(Vender_Pizza())
+Vender2 = DesarrolloPizzeria(Vender_Submarino())
+Repartir1 = DesarrolloPizzeria(Repartir_Pizza())
+Repartir2 = DesarrolloPizzeria(Repartir_Submarino())
+
+Cocinar1.Producto()
+Vender1.Producto()
+Repartir1.Producto()
+Cocinar2.Producto()
+Vender2.Producto()
+Repartir2.Producto()
